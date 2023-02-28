@@ -33,7 +33,7 @@ for (const file of eventFiles) {
 
 client.on('interactionCreate', async (interaction) => {
 	if (!interaction.isChatInputCommand()) return;
-/*	if (interaction.user.id != 'XXXXXXXXXXXXXXXXXX') return;') {
+	/*	if (interaction.user.id != 'XXXXXXXXXXXXXXXXXX') return;') {
 		console.log(`${interaction.user.username} tried to run a command!`);
 		await interaction.reply({ content: 'Only my owner may run this command!', ephemeral: true });
 		return;
