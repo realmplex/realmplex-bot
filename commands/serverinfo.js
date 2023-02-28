@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, AttachmentBuilder } = require('discord.js');
-const mcping = require('mc-ping-updated');
+const mcping = require('mcping-js');
 
 let status;
 let buffer;
@@ -38,14 +38,6 @@ timeout();
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('serverinfo')
-		/* .addStringOption(option =>
-			option.setName('ipaddress')
-				.setDescription('The IP Address of the Minecraft server you want to check')
-				.setRequired(true))
-		.addIntegerOption(option =>
-			option.setName('port')
-				.setDescription('The port the Minecraft server you want to check is on')
-				.setRequired(true))*/
 		.setDescription('Gives status information about a Minecraft server'),
 	async execute(interaction) {
 		// const ip = interaction.options.getString('ipaddress');
