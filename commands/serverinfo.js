@@ -3,10 +3,13 @@ const mcping = require('mcping-js');
 
 let status;
 let buffer;
+const ip = 'taylorworld.serverminer.com';
 
 function timeout() {
-	setTimeout(function() {
-		mcping('taylorworld.serverminer.com', 26542, function(err, res) {
+	setTimeout(async () => {
+		const server = new mcping.MinecraftServer(ip, '26542');
+
+		server.ping(10000, 760, (err, res) => {
 			if (err) {
 				console.log(err);
 			} else {
@@ -29,7 +32,7 @@ function timeout() {
 					console.log(err);
 				}
 			}
-		}, 5000);
+		});
 		timeout();
 	}, 10000);
 }
@@ -40,16 +43,14 @@ module.exports = {
 		.setName('serverinfo')
 		.setDescription('Gives status information about a Minecraft server'),
 	async execute(interaction) {
-		// const ip = interaction.options.getString('ipaddress');
-		// const port = interaction.options.getInteger('port');
-		const attachment = new AttachmentBuilder(buffer, { name: 'icon.png' });
 
+		const attachment = new AttachmentBuilder(buffer, { name: 'icon.png' });
 		await interaction.reply({ embeds: [
 			new EmbedBuilder()
 				.setTitle('Minecraft Server Information')
 				.setTimestamp(Date.now())
 				.setThumbnail('attachment://icon.png')
-				.setDescription('taylorworld.serverminer.com')
+				.setDescription(ip)
 				.addFields(
 					{ name: 'Information', value: `Version: ${status.version.name}\nPlayers: ${status.players.online}/${status.players.max}\nMOTD: ${status.description.text}` },
 					{ name: 'Extra', value: `Previews Chat: ${status.previewsChat}\nEnforce Secure Profile: ${status.enforcesSecureChat}` },
