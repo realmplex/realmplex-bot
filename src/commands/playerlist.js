@@ -35,7 +35,7 @@ module.exports = {
 			.setTitle('Player List')
 			.setDescription(`${status.online}/${status.max}`)
 			.addFields(
-				{ name: 'Online Players:', value: `\`${names}\`` },
+				{ name: 'Online Players:', value: `${names}` },
 			)
 			.setTimestamp(Date.now());
 		await interaction.reply({ embeds: [embed], ephemeral: false });
