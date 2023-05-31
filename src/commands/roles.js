@@ -16,10 +16,10 @@ module.exports = {
 					.setCustomId('2')
 					.setLabel('Media Notifications')
 					.setStyle(ButtonStyle.Primary),
-				new ButtonBuilder()
+				/* new ButtonBuilder()
 					.setCustomId('3')
 					.setLabel('Server Status Ping')
-					.setStyle(ButtonStyle.Primary),
+					.setStyle(ButtonStyle.Primary), */
 				new ButtonBuilder()
 					.setCustomId('clear')
 					.setLabel('Clear')
