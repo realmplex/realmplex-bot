@@ -1,6 +1,8 @@
+const { Events } = require('discord.js');
+
 module.exports = {
-	name: 'interactionCreate',
-	execute(interaction) {
+	name: Events.InteractionCreate,
+	async execute(interaction) {
 		if (!interaction.isButton()) return;
 
 		const buttonId = interaction.customId;
