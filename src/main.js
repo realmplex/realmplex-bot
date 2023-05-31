@@ -37,6 +37,13 @@ client.on('interactionCreate', async (interaction) => {
 	const command = client.commands.get(interaction.commandName);
 
 	if (!command) return;
+	if (interaction.commandName === 'roles' && interaction.user.id !== '616469681678581781') {
+		await interaction.reply({
+			content: 'Only my owner can use this command!',
+			ephemeral: true,
+		});
+		return;
+	}
 	try {
 		await command.execute(interaction);
 	} catch (error) {
