@@ -1,10 +1,11 @@
 const { ModalBuilder } = require('@discordjs/builders');
-const { SlashCommandBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder } = require('discord.js');
+const { SlashCommandBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder, PermissionFlagsBits } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('message')
-		.setDescription('Send a message'),
+		.setDescription('Send a message')
+		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 	async execute(interaction) {
 		const modal = new ModalBuilder()
 			.setCustomId('messageModal')

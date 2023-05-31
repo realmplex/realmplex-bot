@@ -1,10 +1,11 @@
 const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require('@discordjs/builders');
-const { SlashCommandBuilder, ButtonStyle } = require('discord.js');
+const { SlashCommandBuilder, ButtonStyle, PermissionFlagsBits } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('roles')
-		.setDescription('Get roles you need'),
+		.setDescription('Get roles you need')
+		.setDefaultMemberPermissions(PermissionFlagsBits.ManageRoles),
 	async execute(interaction) {
 		const roleButtons = new ActionRowBuilder()
 			.addComponents(
@@ -26,7 +27,7 @@ module.exports = {
 					.setStyle(ButtonStyle.Danger),
 			);
 		const embed = new EmbedBuilder()
-			.setColor(0xf59042)
+			.setColor(0x4275f5)
 			.setTimestamp(Date.now())
 			.setTitle('Get roles here!');
 		await interaction.reply({ content: 'Sending embed...', ephemeral: true });
