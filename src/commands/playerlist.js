@@ -3,17 +3,20 @@ const { SlashCommandBuilder } = require('discord.js');
 const mcping = require('mcping-js');
 
 let status;
-const ip = 'taylorworld.serverminer.com';
+const ip = 'realmplex.toaster.pw';
 
 function timeout() {
 	setTimeout(async () => {
-		const server = new mcping.MinecraftServer(ip, '26542');
+		const server = new mcping.MinecraftServer(ip, '25569');
 
 		server.ping(10000, 760, (err, res) => {
 			if (err) {
 				console.log(err);
 			} else {
 				status = res.players;
+				if (status.sample == undefined) {
+					status.sample = '*`No players online`*';
+				}
 			}
 		});
 		timeout();
@@ -30,7 +33,7 @@ module.exports = {
 		const embed = new EmbedBuilder()
 			.setColor(0xdd50b0)
 			.setTitle('Player List')
-			.setDescription(`${status}`);
+			.setDescription(`${status.sample}`);
 		await interaction.reply({ embeds: [embed], ephemeral: false });
 	},
 };
