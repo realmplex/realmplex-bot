@@ -10,11 +10,15 @@ module.exports = {
 			.addComponents(
 				new ButtonBuilder()
 					.setCustomId('1')
-					.setLabel('Announcement Ping')
+					.setLabel('Server Announcements')
 					.setStyle(ButtonStyle.Primary),
 				new ButtonBuilder()
 					.setCustomId('2')
-					.setLabel('Server Status')
+					.setLabel('Media Notifications')
+					.setStyle(ButtonStyle.Primary),
+				new ButtonBuilder()
+					.setCustomId('3')
+					.setLabel('Server Status Ping')
 					.setStyle(ButtonStyle.Primary),
 				new ButtonBuilder()
 					.setCustomId('clear')
