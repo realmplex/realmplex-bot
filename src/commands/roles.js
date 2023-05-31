@@ -27,6 +27,7 @@ module.exports = {
 			);
 		const embed = new EmbedBuilder()
 			.setColor(0xdd50b0)
+			.setTimestamp(Date.now())
 			.setTitle('Get roles here!');
 		await interaction.reply({ components: [roleButtons], embeds: [embed], ephemeral: false });
 	},

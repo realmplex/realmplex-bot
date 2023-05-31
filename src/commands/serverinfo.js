@@ -36,6 +36,7 @@ module.exports = {
 		await interaction.reply({
 			embeds: [
 				new EmbedBuilder()
+					.setColor(0xf59042)
 					.setTitle('Minecraft Server Information')
 					.setTimestamp(Date.now())
 					.setThumbnail('attachment://icon.png')
