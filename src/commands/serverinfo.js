@@ -44,7 +44,8 @@ module.exports = {
 					.addFields(
 						{ name: 'Information', value: `Version: ${status.version.name}\nPlayers: ${status.players.online}/${status.players.max}\nMOTD: Celebrating 2 Years!` },
 						{ name: 'Extra', value: `Previews Chat: ${status.previewsChat}\nEnforce Secure Profile: ${status.enforcesSecureChat}` },
-					),
+					)
+					.setFooter({ text: 'Realmplex', iconURL: 'https://cdn.discordapp.com/avatars/1001311496036429845/82d48625a3789042b13c1e8053e64414.png' }),
 			],
 			ephemeral: false,
 			files: [attachment],

@@ -37,7 +37,8 @@ module.exports = {
 			.addFields(
 				{ name: 'Online Players:', value: `${names}` },
 			)
-			.setTimestamp(Date.now());
+			.setTimestamp(Date.now())
+			.setFooter({ text: 'Realmplex', iconURL: 'https://cdn.discordapp.com/avatars/1001311496036429845/82d48625a3789042b13c1e8053e64414.png' });
 		await interaction.reply({ embeds: [embed], ephemeral: false });
 	},
 };
