@@ -3,11 +3,11 @@ const mcping = require('mcping-js');
 
 let status;
 let buffer;
-const ip = 'taylorworld.serverminer.com';
+const ip = 'realmplex.toaster.pw';
 
 function timeout() {
 	setTimeout(async () => {
-		const server = new mcping.MinecraftServer(ip, '26542');
+		const server = new mcping.MinecraftServer(ip, '25569');
 
 		server.ping(10000, 760, (err, res) => {
 			if (err) {
@@ -24,9 +24,9 @@ function timeout() {
 				}
 				try {
 					if (status.description.text == '') {
-						status.description.text = 'The MOTD either does not exist or could not be read';
+						status.description.text = '*The MOTD either does not exist or could not be read*';
 					} else if (typeof status.description.text === 'undefined') {
-						status.description.text = 'The MOTD either does not exist or could not be read';
+						status.description.text = '*The MOTD either does not exist or could not be read*';
 					}
 				} catch {
 					console.log(err);
@@ -43,18 +43,21 @@ module.exports = {
 		.setName('serverinfo')
 		.setDescription('Gives status information about a Minecraft server'),
 	async execute(interaction) {
-
 		const attachment = new AttachmentBuilder(buffer, { name: 'icon.png' });
-		await interaction.reply({ embeds: [
-			new EmbedBuilder()
-				.setTitle('Minecraft Server Information')
-				.setTimestamp(Date.now())
-				.setThumbnail('attachment://icon.png')
-				.setDescription(ip)
-				.addFields(
-					{ name: 'Information', value: `Version: ${status.version.name}\nPlayers: ${status.players.online}/${status.players.max}\nMOTD: ${status.description.text}` },
-					{ name: 'Extra', value: `Previews Chat: ${status.previewsChat}\nEnforce Secure Profile: ${status.enforcesSecureChat}` },
-				),
-		], ephemeral: false, files: [attachment] });
+		await interaction.reply({
+			embeds: [
+				new EmbedBuilder()
+					.setTitle('Minecraft Server Information')
+					.setTimestamp(Date.now())
+					.setThumbnail('attachment://icon.png')
+					.setDescription(ip)
+					.addFields(
+						{ name: 'Information', value: `Version: ${status.version.name}\nPlayers: ${status.players.online}/${status.players.max}\nMOTD: ${status.description.text}` },
+						{ name: 'Extra', value: `Previews Chat: ${status.previewsChat}\nEnforce Secure Profile: ${status.enforcesSecureChat}` },
+					),
+			],
+			ephemeral: false,
+			files: [attachment],
+		});
 	},
 };
