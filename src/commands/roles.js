@@ -26,9 +26,10 @@ module.exports = {
 					.setStyle(ButtonStyle.Danger),
 			);
 		const embed = new EmbedBuilder()
-			.setColor(0xdd50b0)
+			.setColor(0xf59042)
 			.setTimestamp(Date.now())
 			.setTitle('Get roles here!');
-		await interaction.reply({ components: [roleButtons], embeds: [embed], ephemeral: false });
+		await interaction.reply({ content: 'Sending embed...', ephemeral: true });
+		await interaction.channel.send({ components: [roleButtons], embeds: [embed], ephemeral: false });
 	},
 };
