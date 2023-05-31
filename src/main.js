@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, GatewayIntentBits, Collection } = require('discord.js');
-const { token } = require('config.json');
+const { token } = require('./config.json');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -33,7 +33,9 @@ for (const file of eventFiles) {
 
 client.on('interactionCreate', async (interaction) => {
 	if (!interaction.isChatInputCommand()) return;
+
 	const command = client.commands.get(interaction.commandName);
+
 	if (!command) return;
 	try {
 		await command.execute(interaction);
