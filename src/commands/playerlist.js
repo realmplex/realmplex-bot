@@ -10,6 +10,7 @@ module.exports = {
 		const ip = 'realmplex.toaster.pw';
 		const port = '25569';
 		let status;
+		let names;
 		const server = new mcping.MinecraftServer(ip, port);
 
 		await new Promise((resolve, reject) => {
@@ -19,6 +20,9 @@ module.exports = {
 					reject(err);
 				} else {
 					status = res.players;
+					names = status.sample.map(player => player.name);
+					names.sort();
+					names = names.join('\n');
 					if (status.sample == undefined) {
 						status.sample = '*`No players online`*';
 					}
@@ -27,9 +31,13 @@ module.exports = {
 			});
 		});
 		const embed = new EmbedBuilder()
-			.setColor(0xdd50b0)
+			.setColor(0x4275f5)
 			.setTitle('Player List')
-			.setDescription(`${status.sample}`);
+			.setDescription(`${status.online}/${status.max}`)
+			.addFields(
+				{ name: 'Online Players:', value: `\`${names}\`` },
+			)
+			.setTimestamp(Date.now());
 		await interaction.reply({ embeds: [embed], ephemeral: false });
 	},
 };
