@@ -5,7 +5,7 @@ const mcping = require('mcping-js');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('playerlist')
-		.setDescription('Get a list of players on the server'),
+		.setDescription('Get a list of players on Realmplex.'),
 	async execute(interaction) {
 		const ip = 'realmplex.toaster.pw';
 		const port = '25569';
