@@ -26,16 +26,6 @@ module.exports = {
 				member.roles.add('947721012039012402');
 				return interaction.reply({ content: 'Successfully added \'Media Notifications\'', ephemeral: true });
 			}
-		} else if (buttonId === '3') {
-			const member = interaction.member;
-
-			if (member.roles.cache.has('1113273329948823592')) {
-				member.roles.remove('1113273329948823592');
-				return interaction.reply({ content: 'Successfully removed \'Server Status Ping\'', ephemeral: true });
-			} else {
-				member.roles.add('1113273329948823592');
-				return interaction.reply({ content: 'Successfully added \'Server Status Ping\'', ephemeral: true });
-			}
 		} else if (buttonId === 'clear') {
 			const allRoles = ['1113273262353420368', '1113273309619032195', '1113273329948823592'];
 			try {
