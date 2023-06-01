@@ -7,6 +7,13 @@ module.exports = {
 		.setDescription('Get roles you need')
 		.setDefaultMemberPermissions(PermissionFlagsBits.ManageRoles),
 	async execute(interaction) {
+		if (interaction.user.id !== '616469681678581781') {
+			await interaction.reply({
+				content: 'Only my owner can use this command!',
+				ephemeral: true,
+			});
+			return;
+		}
 		const roleButtons = new ActionRowBuilder()
 			.addComponents(
 				new ButtonBuilder()
