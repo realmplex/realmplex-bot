@@ -28,13 +28,13 @@ module.exports = {
 
 		const messageId = new TextInputBuilder()
 			.setCustomId('messageId')
-			.setLabel('The Id of the message you want to edit.')
+			.setLabel('The id of the message you want to edit.')
 			.setStyle(TextInputStyle.Short)
 			.setValue(interaction.targetId);
 
 		const channelId = new TextInputBuilder()
 			.setCustomId('channelId')
-			.setLabel('The Id of the channel the message is in.')
+			.setLabel('The id of the channel the message is in.')
 			.setStyle(TextInputStyle.Short)
 			.setValue(interaction.channelId);
 
