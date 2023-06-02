@@ -69,7 +69,7 @@ module.exports = {
 
 		try {
 			await new Promise((resolve, reject) => {
-				server.ping(5000, Number(protocol[version]), (err, res) => {
+				server.ping(10000, Number(protocol[version]), (err, res) => {
 					if (err) {
 						reject(err);
 					} else {
@@ -93,7 +93,15 @@ module.exports = {
 				});
 			});
 		} catch (err) {
-			interaction.editReply({ embeds: [new EmbedBuilder().setColor(0xf54242).setTitle('Minecraft Server Information').setDescription('An error occurred while trying to ping the server. Please check that the server address is correct and that the server is online and running.')] });
+			interaction.editReply({ embeds: [
+				new EmbedBuilder()
+					.setColor(0xf54242)
+					.setTitle('Minecraft Server Information')
+					.setDescription('An error occurred while trying to ping the server. Please check that the server address is correct and that the server is online and running.')
+					.setFooter({ text: 'Realmplex', iconURL: 'https://cdn.discordapp.com/avatars/1001311496036429845/82d48625a3789042b13c1e8053e64414.png' })
+					.setTimestamp(Date.now()),
+			],
+			});
 			return;
 		}
 
