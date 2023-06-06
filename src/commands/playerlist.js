@@ -19,13 +19,16 @@ module.exports = {
 					console.log(err);
 					reject(err);
 				} else {
-					status = res.players;
-					names = status.sample.map(player => player.name);
+					if (res.sample == undefined) {
+						names = '*`No players online`*';
+						status = res.players
+						resolve();
+						return;
+					}
+					status = res.players
+						.then(names = status.sample.map(player => player.name));
 					names.sort();
 					names = names.join('\n');
-					if (status.sample == undefined) {
-						status.sample = '*`No players online`*';
-					}
 					resolve();
 				}
 			});
