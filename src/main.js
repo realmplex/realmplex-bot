@@ -2,6 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { Client, GatewayIntentBits, Collection } = require('discord.js');
 const { token } = require('./config.json');
+const mcping = require('mcping-js');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -28,3 +29,22 @@ for (const file of eventFiles) {
 }
 
 client.login(token);
+
+function timeout() {
+	setTimeout(async () => {
+		const server = new mcping.MinecraftServer('realmplex.toaster.pw', 25569);
+		server.ping(10000, 760, (err, res) => {
+			if (err) {
+				console.log(err);
+			} else {
+				const status = res;
+				const channel = client.channels.fetch('1114356323056889937')
+					.then((channel) => channel.edit({ name: `Online: ${status.players.online}/${status.players.max}` }));
+
+			}
+		});
+		timeout();
+	}, 60000);
+}
+
+timeout();
