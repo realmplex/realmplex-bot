@@ -27,13 +27,13 @@ module.exports = {
 				return interaction.reply({ content: 'Successfully added \'Media Notifications\'', ephemeral: true });
 			}
 		} else if (buttonId === 'clear') {
-			const allRoles = ['1113273262353420368', '1113273309619032195', '1113273329948823592'];
+			const allRoles = ['902717103277244426', '947721012039012402'];
 			try {
 				interaction.member.roles.remove(allRoles);
 			} catch (error) {
 				console.log(error);
 			}
-			return interaction.reply({ content: 'Successfully cleared all roles', ephemeral: true });
+			return interaction.reply({ content: 'Successfully removed all selectable roles', ephemeral: true });
 		} else {
 			return;
 		}
