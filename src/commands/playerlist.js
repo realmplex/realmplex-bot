@@ -19,9 +19,9 @@ module.exports = {
 					console.log(err);
 					reject(err);
 				} else {
-					if (res.sample == undefined) {
+					if (res.players.sample == undefined) {
 						names = '*`No players online`*';
-						status = res.players
+						status = res.players;
 						resolve();
 						return;
 					}
