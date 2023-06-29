@@ -35,7 +35,8 @@ function timeout() {
 		const server = new mcping.MinecraftServer('realmplex.toaster.pw', 25569);
 		server.ping(10000, 760, (err, res) => {
 			if (err) {
-				console.log(err);
+				const channel = client.channels.fetch('1114356323056889937')
+					.then((channel) => channel.edit({ name: 'Server offline!' }));
 			} else {
 				const status = res;
 				const channel = client.channels.fetch('1114356323056889937')
@@ -44,7 +45,7 @@ function timeout() {
 			}
 		});
 		timeout();
-	}, 60000);
+	}, 600000);
 }
 
 timeout();

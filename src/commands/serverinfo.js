@@ -35,6 +35,7 @@ module.exports = {
 					{ name: '1.19.1/2', value: '1.19.1/2' },
 					{ name: '1.19.3', value: '1.19.3' },
 					{ name: '1.19.4', value: '1.19.4' },
+					{ name: '1.20/1', value: '1.20' },
 				)
 				.setRequired(false)),
 	async execute(interaction) {
@@ -63,6 +64,7 @@ module.exports = {
 			'1.19.1/2': 760,
 			'1.19.3': 761,
 			'1.19.4': 762,
+			'1.20': 763,
 		};
 
 		await interaction.deferReply({ ephemeral: false });
@@ -71,6 +73,7 @@ module.exports = {
 			await new Promise((resolve, reject) => {
 				server.ping(10000, Number(protocol[version]), (err, res) => {
 					if (err) {
+						console.log(err);
 						reject(err);
 					} else {
 						status = res;
@@ -86,6 +89,9 @@ module.exports = {
 							status.description = 'The MOTD could not be retrieved.';
 						} else {
 							motd = status.description.text || status.description;
+							if (motd.extra) {
+								motd = motd.extra.map(({ text }) => text).join('');
+							}
 							motd = motd.replace(/§[0-9a-fklmnor]/g, '');
 						}
 						resolve();
