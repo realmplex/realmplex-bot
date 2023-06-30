@@ -3,7 +3,7 @@ const { Events } = require('discord.js');
 module.exports = {
 	name: Events.InteractionCreate,
 	async execute(interaction) {
-		if (!interaction.isModalSubmit() || interaction.customId !== 'messageModal') return;
+		if (!interaction.isModalSubmit() && interaction.customId !== 'messageModal') return;
 
 		let embedObject;
 		const embedString = interaction.fields.components[0].components[0].value;

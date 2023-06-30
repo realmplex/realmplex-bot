@@ -43,7 +43,7 @@ module.exports = {
 			editModal.addComponents(firstInput);
 
 			await interaction.showModal(editModal);
-		} else if (interaction.isModalSubmit() || interaction.customId == 'editMessageModal') {
+		} else if (interaction.isModalSubmit() && interaction.customId == 'editMessageModal') {
 			let embedObject;
 			let channel;
 			let message;
