@@ -7,8 +7,8 @@ module.exports = {
 		.setName('playerlist')
 		.setDescription('Get a list of players on Realmplex.'),
 	async execute(interaction) {
-		const ip = 'realmplex.toaster.pw';
-		const port = '25569';
+		const ip = 'realmplex.com';
+		const port = '25565';
 		let status;
 		let names;
 		const server = new mcping.MinecraftServer(ip, port);
