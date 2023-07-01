@@ -7,7 +7,7 @@ module.exports = {
 		.setName('playerlist')
 		.setDescription('Get a list of players on Realmplex.'),
 	async execute(interaction) {
-		const ip = 'realmplex.com';
+		const ip = 'mc.realmplex.com';
 		const port = '25565';
 		let status;
 		let names;

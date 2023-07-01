@@ -9,7 +9,7 @@ module.exports = {
 		client.user.setPresence({ activities: [{ name: 'on Realmplex! realmplex.com' }], status: 'online' });
 		function timeout() {
 			setTimeout(async () => {
-				const server = new mcping.MinecraftServer('realmplex.com', 25565);
+				const server = new mcping.MinecraftServer('mc.realmplex.com', 25565);
 				server.ping(10000, 760, (err, res) => {
 					if (err) {
 						client.channels.fetch('1114356323056889937')

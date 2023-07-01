@@ -43,7 +43,7 @@ module.exports = {
 		let buffer;
 		let motd;
 
-		const ip = interaction.options.getString('ip') ?? 'realmplex.com';
+		const ip = interaction.options.getString('ip') ?? 'mc.realmplex.com';
 		const port = interaction.options.getNumber('port') ?? 25565;
 		const version = interaction.options.getString('version') ?? '1.19.1/2';
 		const server = new mcping.MinecraftServer(ip, port);
