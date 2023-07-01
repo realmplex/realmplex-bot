@@ -4,11 +4,7 @@ const { SlashCommandBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('message')
-		.setDescription('Send a message')
-		.addChannelOption(option =>
-			option.setName('channel')
-				.setDescription('The channel to send the message in.')
-				.setRequired(true)),
+		.setDescription('Send a message'),
 	async execute(interaction) {
 		if (interaction.user.id !== '616469681678581781') {
 			interaction.reply({ content: 'Only my owner may use this command!', ephemeral: true });
