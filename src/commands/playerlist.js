@@ -25,10 +25,10 @@ module.exports = {
 						resolve();
 						return;
 					}
-					status = res.players
-						.then(names = status.sample.map(player => player.name));
+					status = res.players;
+					names = status.sample.map(player => player.name);
 					names.sort();
-					names = names.join('\n');
+					names = names.join('`\n`');
 					resolve();
 				}
 			});
@@ -38,7 +38,7 @@ module.exports = {
 			.setTitle('Player List')
 			.setDescription(`${status.online}/${status.max}`)
 			.addFields(
-				{ name: 'Online Players:', value: `${names}` },
+				{ name: 'Online Players:', value: `\`${names}\`` },
 			)
 			.setTimestamp(Date.now())
 			.setFooter({ text: 'Realmplex', iconURL: 'https://cdn.discordapp.com/avatars/1001311496036429845/82d48625a3789042b13c1e8053e64414.png' });
