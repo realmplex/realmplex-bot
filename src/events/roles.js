@@ -10,30 +10,47 @@ module.exports = {
 			const member = interaction.member;
 
 			if (member.roles.cache.has('902717103277244426')) {
-				member.roles.remove('902717103277244426');
-				return interaction.reply({ content: 'Successfully removed \'Server Announcements\'', ephemeral: true });
+				try {
+					await member.roles.remove('902717103277244426');
+					return interaction.reply({ content: 'Successfully removed \'Server Announcements\'', ephemeral: true });
+				} catch (err) {
+					return interaction.reply({ content: 'Something went wrong! My permissions are incorrect.', ephemeral: true });
+				}
 			} else {
-				member.roles.add('902717103277244426');
-				return interaction.reply({ content: 'Successfully added \'Server Announcements\'', ephemeral: true });
+				try {
+					await member.roles.add('902717103277244426');
+					return interaction.reply({ content: 'Successfully added \'Server Announcements\'', ephemeral: true });
+				} catch (err) {
+					return interaction.reply({ content: 'Something went wrong! My permissions are incorrect.', ephemeral: true });
+				}
 			}
 		} else if (buttonId === '2') {
 			const member = interaction.member;
 
 			if (member.roles.cache.has('947721012039012402')) {
-				member.roles.remove('947721012039012402');
-				return interaction.reply({ content: 'Successfully removed \'Media Notifications\'', ephemeral: true });
+				try {
+					await member.roles.remove('947721012039012402');
+					return interaction.reply({ content: 'Successfully removed \'Media Notifications\'', ephemeral: true });
+				} catch (err) {
+					return interaction.reply({ content: 'Something went wrong! My permissions are incorrect.', ephemeral: true });
+				}
 			} else {
-				member.roles.add('947721012039012402');
-				return interaction.reply({ content: 'Successfully added \'Media Notifications\'', ephemeral: true });
+				try {
+					await member.roles.add('947721012039012402');
+					return interaction.reply({ content: 'Successfully added \'Media Notifications\'', ephemeral: true });
+				} catch (err) {
+					return interaction.reply({ content: 'Something went wrong! My permissions are incorrect.', ephemeral: true });
+				}
 			}
 		} else if (buttonId === 'clear') {
 			const allRoles = ['902717103277244426', '947721012039012402'];
 			try {
-				interaction.member.roles.remove(allRoles);
+				await interaction.member.roles.remove(allRoles);
+				return interaction.reply({ content: 'Successfully removed all selectable roles', ephemeral: true });
 			} catch (error) {
 				console.log(error);
+				return interaction.reply({ content: 'Something went wrong! My permissions are incorrect.', ephemeral: true });
 			}
-			return interaction.reply({ content: 'Successfully removed all selectable roles', ephemeral: true });
 		} else {
 			return;
 		}
