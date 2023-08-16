@@ -14,12 +14,6 @@ module.exports = {
 					await member.roles.remove('902717103277244426');
 					return interaction.reply({ content: 'Successfully removed \'Server Announcements\'', ephemeral: true });
 				} catch (err) {
-					const channel = await interaction.client.channels.fetch('817166710309388319');
-					channel.send({ embeds: [{
-						'title': `${err}`,
-						'description': 'An error occurred trying to modify the roles of a user.\nPlease check that my permissions are correct.',
-						'color': 16073282,
-					}] });
 					return interaction.reply({ content: 'Something went wrong! My permissions are incorrect.', ephemeral: true });
 				}
 			} else {
@@ -27,12 +21,6 @@ module.exports = {
 					await member.roles.add('902717103277244426');
 					return interaction.reply({ content: 'Successfully added \'Server Announcements\'', ephemeral: true });
 				} catch (err) {
-					const channel = await interaction.client.channels.fetch('817166710309388319');
-					channel.send({ embeds: [{
-						'title': `${err}`,
-						'description': 'An error occurred trying to modify the roles of a user.\nPlease check that my permissions are correct.',
-						'color': 16073282,
-					}] });
 					return interaction.reply({ content: 'Something went wrong! My permissions are incorrect.', ephemeral: true });
 				}
 			}
@@ -44,12 +32,6 @@ module.exports = {
 					await member.roles.remove('947721012039012402');
 					return interaction.reply({ content: 'Successfully removed \'Media Notifications\'', ephemeral: true });
 				} catch (err) {
-					const channel = await interaction.client.channels.fetch('817166710309388319');
-					channel.send({ embeds: [{
-						'title': `${err}`,
-						'description': 'An error occurred trying to modify the roles of a user.\nPlease check that my permissions are correct.',
-						'color': 16073282,
-					}] });
 					return interaction.reply({ content: 'Something went wrong! My permissions are incorrect.', ephemeral: true });
 				}
 			} else {
@@ -57,12 +39,6 @@ module.exports = {
 					await member.roles.add('947721012039012402');
 					return interaction.reply({ content: 'Successfully added \'Media Notifications\'', ephemeral: true });
 				} catch (err) {
-					const channel = await interaction.client.channels.fetch('817166710309388319');
-					channel.send({ embeds: [{
-						'title': `${err}`,
-						'description': 'An error occurred trying to modify the roles of a user.\nPlease check that my permissions are correct.',
-						'color': 16073282,
-					}] });
 					return interaction.reply({ content: 'Something went wrong! My permissions are incorrect.', ephemeral: true });
 				}
 			}
@@ -72,12 +48,6 @@ module.exports = {
 				await interaction.member.roles.remove(allRoles);
 				return interaction.reply({ content: 'Successfully removed all selectable roles', ephemeral: true });
 			} catch (err) {
-				const channel = await interaction.client.channels.fetch('817166710309388319');
-				channel.send({ embeds: [{
-					'title': `${err}`,
-					'description': 'An error occurred trying to modify the roles of a user.\nPlease check that my permissions are correct.',
-					'color': 16073282,
-				}] });
 				return interaction.reply({ content: 'Something went wrong! My permissions are incorrect.', ephemeral: true });
 			}
 		} else {
