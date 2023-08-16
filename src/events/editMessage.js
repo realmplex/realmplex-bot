@@ -65,8 +65,12 @@ module.exports = {
 				return;
 			}
 
-			message.edit(embedObject);
-			interaction.reply({ content: 'Message edited!', ephemeral: true });
+			try {
+				message.edit(embedObject);
+			} catch {
+				return interaction.reply({ content: 'There was an error trying to edit your message. Please check that your JSON is correct.', ephemeral: true });
+			}
+			return interaction.reply({ content: 'Message edited!', ephemeral: true });
 		} else {
 			return;
 		}

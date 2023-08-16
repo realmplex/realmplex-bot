@@ -12,11 +12,14 @@ module.exports = {
 			embedObject = JSON.parse(embedString);
 		} catch (err) {
 			console.error(err);
-			interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
-			return;
+			return interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 		}
 
-		interaction.channel.send(embedObject);
+		try {
+			interaction.channel.send(embedObject);
+		} catch (err) {
+			return interaction.reply({ content: 'There was an error trying to send your message. Please check that your JSON is correct.', ephemeral: true });
+		}
 
 		await interaction.reply({ content: 'Message sent!', ephemeral: true });
 	},

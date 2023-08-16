@@ -17,7 +17,8 @@ module.exports = {
 		const embed = new TextInputBuilder()
 			.setCustomId('json')
 			.setLabel('The JSON for your message.')
-			.setStyle(TextInputStyle.Paragraph);
+			.setStyle(TextInputStyle.Paragraph)
+			.setValue('{"content":""}');
 
 		const firstInput = new ActionRowBuilder().addComponents(embed);
 
