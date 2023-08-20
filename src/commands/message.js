@@ -14,15 +14,21 @@ module.exports = {
 			.setCustomId('messageModal')
 			.setTitle('Send a message');
 
+		const channelId = new TextInputBuilder()
+			.setCustomId('channel')
+			.setLabel('The channel ID to send the message to.')
+			.setStyle(TextInputStyle.Short)
+			.setValue(`${interaction.channel.id}`);
 		const embed = new TextInputBuilder()
 			.setCustomId('json')
 			.setLabel('The JSON for your message.')
 			.setStyle(TextInputStyle.Paragraph)
 			.setValue('{"content":""}');
 
-		const firstInput = new ActionRowBuilder().addComponents(embed);
+		const firstInput = new ActionRowBuilder().addComponents(channelId);
+		const secondInput = new ActionRowBuilder().addComponents(embed);
 
-		modal.addComponents(firstInput);
+		modal.addComponents(firstInput, secondInput);
 
 		await interaction.showModal(modal);
 	},
