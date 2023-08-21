@@ -26,41 +26,33 @@ module.exports = {
 				});
 			}
 		} else if (interaction.isMessageContextMenuCommand()) {
-			if (interaction.user.id !== '616469681678581781') {
-				interaction.reply({ content: 'Only my owner may use this command!', ephemeral: true });
-				return;
-			}
+			if (interaction.commandName === 'Edit Message' && interaction.user.id === '616469681678581781') {
+				const messageData = (interaction.targetMessage.toJSON());
 
-			const messageData = (interaction.targetMessage.toJSON());
+				const message = {
+					content: messageData.content,
+					embeds: messageData.embeds,
+				};
+				const messageJSON = JSON.stringify(message);
 
-			const messageContent = JSON.stringify(messageData.content);
-			const messageEmbeds = JSON.stringify(messageData.embeds);
+				const editModal = new ModalBuilder()
+					.setCustomId('editMessageModal')
+					.setTitle('Edit a message');
 
-			const message = {
-				content: JSON.parse(messageContent),
-				embeds: JSON.parse(messageEmbeds),
-			};
+				messageId = interaction.targetId;
+				channelId = interaction.channelId;
 
-			const messageJSON = JSON.stringify(message);
+				const editEmbed = new TextInputBuilder()
+					.setCustomId('editjson')
+					.setLabel('The JSON for your message.')
+					.setStyle(TextInputStyle.Paragraph)
+					.setValue(messageJSON);
 
-			const editModal = new ModalBuilder()
-				.setCustomId('editMessageModal')
-				.setTitle('Edit a message');
+				const firstInput = new ActionRowBuilder().addComponents(editEmbed);
 
-			messageId = interaction.targetId;
-			channelId = interaction.channelId;
+				editModal.addComponents(firstInput);
 
-			const editEmbed = new TextInputBuilder()
-				.setCustomId('editjson')
-				.setLabel('The JSON for your message.')
-				.setStyle(TextInputStyle.Paragraph)
-				.setValue(messageJSON);
-
-			const firstInput = new ActionRowBuilder().addComponents(editEmbed);
-
-			editModal.addComponents(firstInput);
-
-			await interaction.showModal(editModal);
+				await interaction.showModal(editModal);
 			} else if (interaction.commandName === 'Delete Message' && interaction.user.id === '616469681678581781') {
 				const channel = await interaction.client.channels.fetch(interaction.channelId);
 				const message = await channel.messages.fetch(interaction.targetMessage.id);
@@ -75,62 +67,62 @@ module.exports = {
 				if (interaction.user.id !== '616469681678581781') {
 					return interaction.reply({ content: 'Only my owner may use this command!', ephemeral: true });
 				}
-			let embedObject;
-			let channel;
-			let message;
-
-			try {
-				channel = await interaction.client.channels.fetch(channelId);
-				message = await channel.messages.fetch(messageId);
-			} catch (err) {
-				console.error(err);
-				interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
-				return;
-			}
-
-			try {
-				embedObject = JSON.parse(interaction.fields.components[0].components[0].value);
-			} catch (err) {
-				console.error(err);
-				interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
-				return;
-			}
-
-			try {
-				message.edit(embedObject);
-			} catch {
-				return interaction.reply({ content: 'There was an error trying to edit your message. Please check that your JSON is correct.', ephemeral: true });
-			}
-			return interaction.reply({ content: 'Message edited!', ephemeral: true });
-			} else if (interaction.customId === 'messageModal') {
-			let embedObject;
-
-			if (interaction.user.id === '616469681678581781') {
-				const messageChannel = interaction.fields.components[0].components[0].value;
-				const embedString = interaction.fields.components[1].components[0].value;
+				let embedObject;
+				let channel;
+				let message;
 
 				try {
-					embedObject = JSON.parse(embedString);
+					channel = await interaction.client.channels.fetch(channelId);
+					message = await channel.messages.fetch(messageId);
 				} catch (err) {
 					console.error(err);
-					return interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+					interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+					return;
 				}
-
-				const channel = await interaction.client.channels.fetch(messageChannel);
-				await channel.send(embedObject)
-					.then(() => interaction.reply({ content: 'Message sent!', ephemeral: true }))
-					.catch(() => interaction.reply({ content: 'There was an error trying to send your message. Please check if your JSON is correct.', ephemeral: true }));
-			} else {
-				const embedString = interaction.fields.components[0].components[0].value;
 
 				try {
-					embedObject = JSON.parse(embedString);
-				} catch {
-					return interaction.reply({ content: 'There was an error trying to parse your message. Please check if your JSON is correct.', ephemeral: true });
+					embedObject = JSON.parse(interaction.fields.components[0].components[0].value);
+				} catch (err) {
+					console.error(err);
+					interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+					return;
 				}
 
-				await interaction.reply(embedObject)
-					.catch(() => interaction.reply({ content: 'There was an error trying to send your message. Please check if your JSON is correct.', ephemeral: true }));
+				try {
+					message.edit(embedObject);
+				} catch {
+					return interaction.reply({ content: 'There was an error trying to edit your message. Please check that your JSON is correct.', ephemeral: true });
+				}
+				return interaction.reply({ content: 'Message edited!', ephemeral: true });
+			} else if (interaction.customId === 'messageModal') {
+				let embedObject;
+
+				if (interaction.user.id === '616469681678581781') {
+					const messageChannel = interaction.fields.components[0].components[0].value;
+					const embedString = interaction.fields.components[1].components[0].value;
+
+					try {
+						embedObject = JSON.parse(embedString);
+					} catch (err) {
+						console.error(err);
+						return interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+					}
+
+					const channel = await interaction.client.channels.fetch(messageChannel);
+					await channel.send(embedObject)
+						.then(() => interaction.reply({ content: 'Message sent!', ephemeral: true }))
+						.catch(() => interaction.reply({ content: 'There was an error trying to send your message. Please check if your JSON is correct.', ephemeral: true }));
+				} else {
+					const embedString = interaction.fields.components[0].components[0].value;
+
+					try {
+						embedObject = JSON.parse(embedString);
+					} catch {
+						return interaction.reply({ content: 'There was an error trying to parse your message. Please check if your JSON is correct.', ephemeral: true });
+					}
+
+					await interaction.reply(embedObject)
+						.catch(() => interaction.reply({ content: 'There was an error trying to send your message. Please check if your JSON is correct.', ephemeral: true }));
 				}
 			}
 		} else if (interaction.isButton()) {
