@@ -6,10 +6,6 @@ module.exports = {
 		.setName('message')
 		.setDescription('Send a message'),
 	async execute(interaction) {
-		if (interaction.user.id !== '616469681678581781') {
-			interaction.reply({ content: 'Only my owner may use this command!', ephemeral: true });
-			return;
-		}
 		const modal = new ModalBuilder()
 			.setCustomId('messageModal')
 			.setTitle('Send a message');
@@ -25,10 +21,14 @@ module.exports = {
 			.setStyle(TextInputStyle.Paragraph)
 			.setValue('{"content":""}');
 
-		const firstInput = new ActionRowBuilder().addComponents(channelId);
-		const secondInput = new ActionRowBuilder().addComponents(embed);
+		const channelInput = new ActionRowBuilder().addComponents(channelId);
+		const jsonInput = new ActionRowBuilder().addComponents(embed);
 
-		modal.addComponents(firstInput, secondInput);
+		if (interaction.user.id === '616469681678581781') {
+			modal.addComponents(channelInput, jsonInput);
+		} else {
+			modal.addComponents(jsonInput);
+		}
 
 		await interaction.showModal(modal);
 	},

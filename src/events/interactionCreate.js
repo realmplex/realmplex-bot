@@ -61,7 +61,7 @@ module.exports = {
 			editModal.addComponents(firstInput);
 
 			await interaction.showModal(editModal);
-		} else if (interaction.isModalSubmit() && interaction.customId == 'editMessageModal') {
+		} else if (interaction.isModalSubmit() && interaction.customId === 'editMessageModal') {
 			let embedObject;
 			let channel;
 			let message;
@@ -90,27 +90,35 @@ module.exports = {
 			}
 			return interaction.reply({ content: 'Message edited!', ephemeral: true });
 		} else if (interaction.isModalSubmit() && interaction.customId === 'messageModal') {
-
 			let embedObject;
-			const messageChannel = interaction.fields.components[0].components[0].value;
-			const embedString = interaction.fields.components[1].components[0].value;
 
+			if (interaction.user.id === '616469681678581781') {
+				const messageChannel = interaction.fields.components[0].components[0].value;
+				const embedString = interaction.fields.components[1].components[0].value;
 
-			try {
-				embedObject = JSON.parse(embedString);
-			} catch (err) {
-				return interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
-			}
+				try {
+					embedObject = JSON.parse(embedString);
+				} catch (err) {
+					console.error(err);
+					return interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+				}
 
-			try {
 				const channel = await interaction.client.channels.fetch(messageChannel);
-				channel.send(embedObject);
-			} catch (err) {
-				console.log(err);
-				return interaction.reply({ content: 'There was an error trying to send your message. Please check that your JSON is correct.', ephemeral: true });
-			}
+				await channel.send(embedObject)
+					.then(() => interaction.reply({ content: 'Message sent!', ephemeral: true }))
+					.catch(() => interaction.reply({ content: 'There was an error trying to send your message. Please check if your JSON is correct.', ephemeral: true }));
+			} else {
+				const embedString = interaction.fields.components[0].components[0].value;
 
-			await interaction.reply({ content: 'Message sent!', ephemeral: true });
+				try {
+					embedObject = JSON.parse(embedString);
+				} catch {
+					return interaction.reply({ content: 'There was an error trying to parse your message. Please check if your JSON is correct.', ephemeral: true });
+				}
+
+				await interaction.reply(embedObject)
+					.catch(() => interaction.reply({ content: 'There was an error trying to send your message. Please check if your JSON is correct.', ephemeral: true }));
+			}
 		} else if (interaction.isButton()) {
 
 			const buttonId = interaction.customId;
