@@ -19,7 +19,7 @@ module.exports = {
 			.setCustomId('json')
 			.setLabel('The JSON for your message.')
 			.setStyle(TextInputStyle.Paragraph)
-			.setValue('{"content":""}');
+			.setValue('{"content":"", embeds: []}');
 
 		const channelInput = new ActionRowBuilder().addComponents(channelId);
 		const jsonInput = new ActionRowBuilder().addComponents(embed);
