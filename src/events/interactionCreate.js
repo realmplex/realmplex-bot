@@ -61,7 +61,20 @@ module.exports = {
 			editModal.addComponents(firstInput);
 
 			await interaction.showModal(editModal);
-		} else if (interaction.isModalSubmit() && interaction.customId === 'editMessageModal') {
+			} else if (interaction.commandName === 'Delete Message' && interaction.user.id === '616469681678581781') {
+				const channel = await interaction.client.channels.fetch(interaction.channelId);
+				const message = await channel.messages.fetch(interaction.targetMessage.id);
+
+				message.delete();
+				return interaction.reply({ content: 'Message deleted!', ephemeral: true });
+			} else {
+				return interaction.reply({ content: 'Only my owner may use this command!', ephemeral: true });
+			}
+		} else if (interaction.isModalSubmit()) {
+			if (interaction.customId === 'editMessageModal') {
+				if (interaction.user.id !== '616469681678581781') {
+					return interaction.reply({ content: 'Only my owner may use this command!', ephemeral: true });
+				}
 			let embedObject;
 			let channel;
 			let message;
@@ -89,7 +102,7 @@ module.exports = {
 				return interaction.reply({ content: 'There was an error trying to edit your message. Please check that your JSON is correct.', ephemeral: true });
 			}
 			return interaction.reply({ content: 'Message edited!', ephemeral: true });
-		} else if (interaction.isModalSubmit() && interaction.customId === 'messageModal') {
+			} else if (interaction.customId === 'messageModal') {
 			let embedObject;
 
 			if (interaction.user.id === '616469681678581781') {
@@ -118,6 +131,7 @@ module.exports = {
 
 				await interaction.reply(embedObject)
 					.catch(() => interaction.reply({ content: 'There was an error trying to send your message. Please check if your JSON is correct.', ephemeral: true }));
+				}
 			}
 		} else if (interaction.isButton()) {
 
